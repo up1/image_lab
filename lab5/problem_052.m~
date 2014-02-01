@@ -1,0 +1,15 @@
+load('PSF_missing_motion.mat')
+
+original = im2double(imread('missing.tif'));
+noise = imnoise(,'gaussian', 0.00083934);
+I = im2double(imread('missing_motion.tif'));
+
+Svv = abs(fft2( noise )).^2;
+Sff = abs(fft2( original )).^2;
+
+NSR = Svv ./ Sff;
+J = deconvwnr(I, PSF, NSR);
+
+mse = MSE(original, J)
+
+figure; imshow(J);

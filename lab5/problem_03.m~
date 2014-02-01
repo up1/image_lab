@@ -1,0 +1,11 @@
+withnoise = imread('noisy_2.tif');
+h = fspecial('mediu', [5, 5], 1.3);
+denoise = imfilter(withnoise, h);
+
+mse = MSE(withnoise, denoise);
+
+
+
+
+
+
